@@ -1,0 +1,153 @@
+/* Admin Layout */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.admin-sidebar h2 {
+    color: #ecf0f1;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+}
+
+.admin-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-sidebar li {
+    margin: 0.5rem 0;
+}
+
+.admin-sidebar a {
+    color: #bdc3c7;
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.admin-sidebar a:hover {
+    background: #34495e;
+    color: #ecf0f1;
+}
+
+.admin-sidebar button {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #bdc3c7;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-sidebar button:hover {
+    background: #34495e;
+    color: #ecf0f1;
+}
+
+/* Management Container */
+.management-container {
+    margin-left: 260px; /* To ensure it doesn't overlap with the sidebar */
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.service-form input,
+.service-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.service-form button {
+    background: #2980b9;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.service-form button:hover {
+    background: #1f618d;
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.service-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+.service-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.service-actions button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.service-actions button:hover {
+    background: #c0392b;
+}
+
+.service-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.service-icon {
+    font-size: 2rem;
+    margin-top: 10px;
+}
