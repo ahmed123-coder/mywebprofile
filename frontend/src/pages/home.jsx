@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/site/selected");
+        const response = await axios.get("https://ahmedkhmiri.onrender.com/api/site/selected");
         setSiteContent(response.data);
       } catch (error) {
         console.error("Error fetching site content:", error);
