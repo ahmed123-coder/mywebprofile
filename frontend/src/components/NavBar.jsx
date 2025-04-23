@@ -32,7 +32,7 @@ export const NavBar = ({logo, siteName}) => {
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand href="/" className="title-web">
-          <img src={`http://localhost:3000/${logo}`} alt="Logo" />
+          <img src={`https://ahmedkhmiri.onrender.com/${logo}`} alt="Logo" />
           <span className="title">{siteName}</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
