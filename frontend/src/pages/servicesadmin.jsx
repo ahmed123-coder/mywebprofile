@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebaradmin from "../components/Sidebaradmin";
+import Sidebaradmin from "../components/sidebaradmin";
 import "../styles/manageservice.css";
 
 const ServiceManager = () => {

@@ -1,4 +1,4 @@
-import Sidebaradmin from '../components/Sidebaradmin';
+import Sidebaradmin from '../components/sidebaradmin';
 import { Outlet } from "react-router-dom";
 const Admin = () => {
   return (
