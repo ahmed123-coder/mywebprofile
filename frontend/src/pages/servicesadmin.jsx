@@ -130,7 +130,7 @@ const ServiceManager = () => {
               </div>
               {service.image && (
                 <img
-                  src={`http://localhost:3000/${service.image}`}
+                  src={`https://ahmedkhmiri.onrender.com/${service.image}`}
                   alt={service.title}
                   className="service-image"
                 />
