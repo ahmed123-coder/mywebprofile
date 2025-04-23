@@ -120,8 +120,8 @@ const SiteManagementPage = () => {
       logoheader: null,
       logohero: null
     });
-    setLogoheaderPreview(site.logoheader ? `http://localhost:3000/${site.logoheader}` : '');
-    setLogoheroPreview(site.logohero ? `http://localhost:3000/${site.logohero}` : '');
+    setLogoheaderPreview(site.logoheader ? `https://ahmedkhmiri.onrender.com/${site.logoheader}` : '');
+    setLogoheroPreview(site.logohero ? `https://ahmedkhmiri.onrender.com/${site.logohero}` : '');
     setEditingId(site._id);
   };
 
@@ -351,7 +351,7 @@ const SiteManagementPage = () => {
                   <td>{site.contactEmail}</td>
                   <td>{site.logoheader && (
     <img
-      src={`http://localhost:3000/${site.logoheader}`}
+      src={`https://ahmedkhmiri.onrender.com/${site.logoheader}`}
       alt={site.siteName}
       className="w-full h-32 object-cover mb-2 rounded"
     />
@@ -359,7 +359,7 @@ const SiteManagementPage = () => {
   <td>
     {site.logohero && (
       <img
-        src={`http://localhost:3000/${site.logohero}`}
+        src={`https://ahmedkhmiri.onrender.com/${site.logohero}`}
         alt={site.siteName}
         className="w-full h-32 object-cover mb-2 rounded"
       />
