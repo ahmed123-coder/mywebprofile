@@ -16,7 +16,7 @@ const ManageProjects = () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/project");
+      const res = await axios.get("https://ahmedkhmiri.onrender.com/api/project");
       setProjects(res.data);
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -32,11 +32,11 @@ const ManageProjects = () => {
 
     try {
       if (editingId) {
-        await axios.put(`http://localhost:3000/api/project/${editingId}`, formData, {
+        await axios.put(`https://ahmedkhmiri.onrender.com/api/project/${editingId}`, formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
       } else {
-        await axios.post("http://localhost:3000/api/project", formData, {
+        await axios.post("https://ahmedkhmiri.onrender.com/api/project", formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
       }
@@ -52,7 +52,7 @@ const ManageProjects = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/project/${id}`, {
+      await axios.delete(`https://ahmedkhmiri.onrender.com/api/project/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       fetchProjects();
