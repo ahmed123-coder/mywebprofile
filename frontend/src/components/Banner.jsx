@@ -66,7 +66,7 @@ export const Banner = ({hero, logohero}) => {
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={`http://localhost:3000/${logohero}`} alt="Header Img"/>
+                  <img src={`https://ahmedkhmiri.onrender.com/${logohero}`} alt="Header Img"/>
                 </div>}
             </TrackVisibility>
           </Col>
