@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import '../styles/siteManagement.css';
 
-const API_URL = 'http://localhost:3000/api/site';
+const API_URL = 'https://ahmedkhmiri.onrender.com/api/site';
 
 const SiteManagementPage = () => {
   const [sites, setSites] = useState([]);
