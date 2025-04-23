@@ -137,7 +137,7 @@ const ServiceManager = () => {
               )}
               {service.icon && (
                 <img
-                  src={`http://localhost:3000/${service.icon}`}
+                  src={`https://ahmedkhmiri.onrender.com/${service.icon}`}
                   alt="Icon"
                   className="service-icon"
                 />
