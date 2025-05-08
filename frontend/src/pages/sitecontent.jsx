@@ -7,6 +7,7 @@ import '../styles/siteManagement.css';
 const API_URL = 'https://ahmedkhmiri.onrender.com/api/site';
 
 const SiteManagementPage = () => {
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [sites, setSites] = useState([]);
   const [formData, setFormData] = useState({
     siteName: '',
@@ -28,6 +29,15 @@ const SiteManagementPage = () => {
 
   // جلب بيانات المواقع عند تحميل الصفحة
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error('يرجى تسجيل الدخول للوصول إلى هذه الصفحة');
+      navigate('/login');
+      return;
+    }
+    else{
+      console.log(token);
+    }
     fetchSites();
   }, []);
 
@@ -75,7 +85,7 @@ const SiteManagementPage = () => {
 
     const formDataToSend = new FormData();
     for (const key in formData) {
-      if (formData[key] !== null) {
+      if (formData[key] !== null || formData[key] !== '') {
         formDataToSend.append(key, formData[key]);
       }
     }
@@ -279,7 +289,7 @@ const SiteManagementPage = () => {
         </div>
 
         <div className="form-group">
-          <label>شعار الهيدر:</label>
+          <label>logoheader :</label>
           <input
             type="file"
             name="logoheader"
