@@ -1,15 +1,11 @@
 require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const app = express();
-const cors = require("cors");
-app.use(cors({
-  origin: ["https://ahmedkhmiri-yht5.vercel.app"], // اسم نطاق الواجهة الأمامية
-  credentials: true
-}));
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000;
