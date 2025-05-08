@@ -114,7 +114,6 @@ router.put("/:id", verifyAdmin, upload.fields([
     if (contactEmail) site.contactEmail = contactEmail;
     if (emailuser) site.emailuser = emailuser;
     if (passworduser) site.passworduser = passworduser;
-    if (selected) site.selected = selected;
     if (logoheader) site.logoheader = logoheader;
     if (logohero) site.logohero = logohero;
 
