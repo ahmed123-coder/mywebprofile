@@ -43,6 +43,7 @@ const SiteManagementPage = () => {
       setSites(response.data);
     } catch (error) {
       toast.error('خطأ في تحميل المواقع');
+      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +96,7 @@ const SiteManagementPage = () => {
       resetForm();
     } catch (err) {
       toast.error('حدث خطأ أثناء الحفظ');
-      console.error(err);
+      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
     }
@@ -129,7 +130,7 @@ const SiteManagementPage = () => {
         fetchSites();
       } catch (err) {
         toast.error('حدث خطأ أثناء الحذف');
-        console.error(err);
+      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
       } finally {
         setIsLoading(false);
       }
@@ -146,7 +147,7 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في تحديد الموقع');
-      console.error(err);
+      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
     }
@@ -162,7 +163,7 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في إلغاء التحديد');
-      console.error(err);
+      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
     }
