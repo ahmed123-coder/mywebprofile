@@ -108,7 +108,7 @@ nav.navbar a.navbar-brand {
     width: 9%;
 }
 nav.navbar .logo{
-	border-radius: 50%;
+  margin: 3px;
 }
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
