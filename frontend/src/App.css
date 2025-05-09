@@ -106,6 +106,7 @@ nav.navbar.scrolled {
 }
 nav.navbar a.navbar-brand {
     width: 9%;
+    border-radius: 50%;
 }
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
