@@ -95,6 +95,7 @@ const SiteManagementPage = () => {
       resetForm();
     } catch (err) {
       toast.error('حدث خطأ أثناء الحفظ');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -128,6 +129,7 @@ const SiteManagementPage = () => {
         fetchSites();
       } catch (err) {
         toast.error('حدث خطأ أثناء الحذف');
+        console.error(err);
       } finally {
         setIsLoading(false);
       }
@@ -144,6 +146,7 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في تحديد الموقع');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -159,6 +162,7 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في إلغاء التحديد');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
