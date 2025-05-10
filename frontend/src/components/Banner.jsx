@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/img/ecommerce.jpeg";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
-export const Banner = ({hero, logohero}) => {
-  const [loopNum, setLoopNum] = useState(0);
+export const Banner = ({ hero, logohero }) => {
+    const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "Web Developer", "youtuber",  "Web Designer", "UI/UX Designer" ];
+  const toRotate = ["Web Developer", "youtuber", "Web Designer", "UI/UX Designer"];
   const period = 2000;
 
   useEffect(() => {
@@ -19,8 +18,10 @@ export const Banner = ({hero, logohero}) => {
       tick();
     }, delta);
 
-    return () => { clearInterval(ticker) };
-  }, [text])
+    // ✅ اطبع قيمة logohero للتأكد من استلامها
+
+    return () => { clearInterval(ticker); };
+  }, [text, logohero]); // أضف logohero هنا أيضًا
 
   const tick = () => {
     let i = loopNum % toRotate.length;
@@ -54,24 +55,42 @@ export const Banner = ({hero, logohero}) => {
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Welcome to my Khmiri IT</span>
-                <h1>{`Hi! I'm Ahmed`} <span className="txt-rotate" dataperiod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <span className="tagline">Welcome to my Khmiri IT</span>
+                  <h1>{`Hi! I'm Ahmed`} <span className="txt-rotate" data-period="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
                   <p>{hero}</p>
                   <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
-              </div>}
+                </div>}
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={`https://ahmedkhmiri.onrender.com/${logohero}`} alt="Header Img"/>
+                <div className={isVisible ? "banner-img animate__animated animate__zoomIn" : ""}>
+                  <div className={isVisible ? "banner-img animate__animated animate__zoomIn" : ""}>
+                  {logohero && (() => {
+  console.log("قيمة logohero:", logohero);
+
+  // تنظيف المسار من الباكسلاش
+  const cleanedPath = logohero.replace(/\\/g, '/');
+
+  // التحقق إذا كان يحتوي على http
+  const fullUrl = cleanedPath.startsWith('http')
+    ? cleanedPath
+    : `http://localhost:3000/${cleanedPath}`;
+
+  console.log("✅ Final logohero path:", fullUrl);
+
+  return <img src={fullUrl} alt="Header Img" />;
+})()}
+
+</div>
+
                 </div>}
             </TrackVisibility>
           </Col>
         </Row>
       </Container>
     </section>
-  )
-}
+  );
+};
