@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import '../styles/siteManagement.css';
 
-const API_URL = 'https://ahmedkhmiri.onrender.com/api/site';
+const API_URL = 'https://mywebprofile-1.onrender.com/api/site';
 
 const SiteManagementPage = () => {
   const [token] = useState(localStorage.getItem('token'));
@@ -113,8 +113,8 @@ const SiteManagementPage = () => {
       logoheader: null,
       logohero: null
     });
-    setLogoheaderPreview(site.logoheader ? `https://ahmedkhmiri.onrender.com/${site.logoheader}` : '');
-    setLogoheroPreview(site.logohero ? `https://ahmedkhmiri.onrender.com/${site.logohero}` : '');
+    setLogoheaderPreview(site.logoheader ? `https://mywebprofile-1.onrender.com/${site.logoheader}` : '');
+    setLogoheroPreview(site.logohero ? `https://mywebprofile-1.onrender.com/${site.logohero}` : '');
     setEditingId(site._id);
   };
 
