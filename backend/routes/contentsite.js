@@ -64,6 +64,10 @@ router.post(
       const logoheader = req.files?.logoheader?.[0]?.path;
       const logohero = req.files?.logohero?.[0]?.path;
 
+      if (!siteName || !siteDescription || !hero || !footer || !contactEmail) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+
       if (!logoheader || !logohero) {
         return res
           .status(400)
@@ -158,7 +162,14 @@ router.put(
       if (passworduser) site.passworduser = passworduser;
       if (logoheader) site.logoheader = logoheader;
       if (logohero) site.logohero = logohero;
-      if (selected) site.selected = selected;
+
+      // Ensure only one site is selected
+      if (selected === "selected") {
+        await Site.updateMany({}, { selected: "not selected" });
+        site.selected = "selected";
+      } else if (selected) {
+        site.selected = selected;
+      }
 
       await site.save();
       res.status(200).json(site);
