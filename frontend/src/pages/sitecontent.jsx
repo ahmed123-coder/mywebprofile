@@ -87,6 +87,7 @@ const SiteManagementPage = () => {
       };
       if (editingId) {
         await axios.put(`${API_URL}/${editingId}`, formDataToSend, config);
+        console.log([...formDataToSend.entries()]);
         toast.success('تم التحديث بنجاح');
       } else {
         await axios.post(API_URL, formDataToSend, config);
@@ -96,6 +97,7 @@ const SiteManagementPage = () => {
       resetForm();
     } catch (err) {
       toast.error('حدث خطأ أثناء الحفظ');
+      console.log([...formDataToSend.entries()]);
       console.error('Error selecting site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
