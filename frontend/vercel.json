@@ -3,4 +3,7 @@
       { "source": "/(.*)", "destination": "/" }
     ]
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d

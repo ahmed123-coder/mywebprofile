@@ -116,6 +116,26 @@ router.get("/selected", async (req, res) => {
     const site = await Site.findOne({ selected: "selected" });
     if (!site) return res.status(404).json({ message: "No site selected" });
 
+<<<<<<< HEAD
+=======
+    const logoheader = req.files?.logoheader?.[0]?.path;
+    const logohero = req.files?.logohero?.[0]?.path;
+
+    const site = await Site.findById(req.params.id);
+    if (!site) return res.status(404).json({ message: "Site not found" });
+
+    if (siteName) site.siteName = siteName;
+    if (siteDescription) site.siteDescription = siteDescription;
+    if (hero) site.hero = hero;
+    if (footer) site.footer = footer;
+    if (contactEmail) site.contactEmail = contactEmail;
+    if (emailuser) site.emailuser = emailuser;
+    if (passworduser) site.passworduser = passworduser;
+    if (logoheader) site.logoheader = logoheader;
+    if (logohero) site.logohero = logohero;
+
+    await site.save();
+>>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
     res.status(200).json(site);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -215,4 +235,19 @@ router.delete("/:id", verifyAdmin, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+// Get the selected site
+router.get("/selected", async (req, res) => {
+  try {
+    const site = await Site.findOne({ selected: "selected" });
+    if (!site) return res.status(404).json({ message: "No site selected" });
+
+    res.status(200).json(site);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+>>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
 module.exports = router;

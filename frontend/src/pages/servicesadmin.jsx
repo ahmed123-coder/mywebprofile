@@ -21,7 +21,7 @@ const ServiceManager = () => {
   const fetchServices = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:3000/api/service");
+      const response = await axios.get("https://ahmedkhmiri.onrender.com/api/service");
       setServices(response.data);
     } catch (error) {
       console.error("Error fetching services:", error);
@@ -33,7 +33,7 @@ const ServiceManager = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this service?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/service/${id}`, {
+        await axios.delete(`https://ahmedkhmiri.onrender.com/api/service/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         fetchServices();
@@ -72,9 +72,9 @@ const ServiceManager = () => {
       };
 
       if (editingService) {
-        await axios.put(`http://localhost:3000/api/service/${editingService}`, formPayload, config);
+        await axios.put(`https://ahmedkhmiri.onrender.com/api/service/${editingService}`, formPayload, config);
       } else {
-        await axios.post("http://localhost:3000/api/service", formPayload, config);
+        await axios.post("https://ahmedkhmiri.onrender.com/api/service", formPayload, config);
       }
 
       setEditingService(null);
@@ -130,14 +130,14 @@ const ServiceManager = () => {
               </div>
               {service.image && (
                 <img
-                  src={`http://localhost:3000/${service.image}`}
+                  src={`https://ahmedkhmiri.onrender.com/${service.image}`}
                   alt={service.title}
                   className="service-image"
                 />
               )}
               {service.icon && (
                 <img
-                  src={`http://localhost:3000/${service.icon}`}
+                  src={`https://ahmedkhmiri.onrender.com/${service.icon}`}
                   alt="Icon"
                   className="service-icon"
                 />
