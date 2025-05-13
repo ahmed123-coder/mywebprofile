@@ -2,23 +2,26 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-const JWT_SECRET = "your_secret_key";
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../cloudinaryConfig");
 const Service = require("../models/service");
 const User = require("../models/user");
 
-// Multer configuration for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Save files in the "uploads" folder
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname); // Rename file to avoid conflicts
-  },
+const JWT_SECRET = "your_secret_key";
+
+// إعداد Cloudinary Storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: async (req, file) => ({
+    folder: "uploads",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    public_id: Date.now() + "-" + file.originalname.split('.')[0],
+  }),
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
-// Middleware to verify admin role
+// تحقق من صلاحيات الأدمن
 const verifyAdmin = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
@@ -37,12 +40,12 @@ const verifyAdmin = async (req, res, next) => {
   }
 };
 
-// POST route to create a new service
+// 🔹 إنشاء خدمة جديدة
 router.post("/", verifyAdmin, upload.fields([{ name: "image" }, { name: "icon" }]), async (req, res) => {
   try {
     const { title, description } = req.body;
-    const image = req.files?.image ? req.files.image[0].path : null;
-    const icon = req.files?.icon ? req.files.icon[0].path : null;
+    const image = req.files?.image?.[0]?.path;
+    const icon = req.files?.icon?.[0]?.path;
 
     if (!title || !description || !image || !icon) {
       return res.status(400).json({ message: "All fields are required" });
@@ -57,7 +60,7 @@ router.post("/", verifyAdmin, upload.fields([{ name: "image" }, { name: "icon" }
   }
 });
 
-// GET route to fetch all services
+// 🔹 جلب كل الخدمات
 router.get("/", async (req, res) => {
   try {
     const services = await Service.find();
@@ -67,12 +70,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// PUT route to update a service
+// 🔹 تعديل خدمة
 router.put("/:id", verifyAdmin, upload.fields([{ name: "image" }, { name: "icon" }]), async (req, res) => {
   try {
     const { title, description } = req.body;
-    const image = req.files?.image ? req.files.image[0].path : null;
-    const icon = req.files?.icon ? req.files.icon[0].path : null;
+    const image = req.files?.image?.[0]?.path;
+    const icon = req.files?.icon?.[0]?.path;
 
     const service = await Service.findById(req.params.id);
     if (!service) {
@@ -91,7 +94,7 @@ router.put("/:id", verifyAdmin, upload.fields([{ name: "image" }, { name: "icon"
   }
 });
 
-// DELETE route to delete a service
+// 🔹 حذف خدمة
 router.delete("/:id", verifyAdmin, async (req, res) => {
   try {
     const service = await Service.findByIdAndDelete(req.params.id);

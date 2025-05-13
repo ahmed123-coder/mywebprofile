@@ -1,24 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "your_secret_key";
 const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../cloudinaryConfig");
 const Project = require("../models/project");
 const User = require("../models/user");
 
-// Multer configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
+const JWT_SECRET = "your_secret_key";
+
+// Cloudinary Storage config
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "uploads",
+    allowed_formats: ["jpg", "png", "jpeg", "webp"],
+    transformation: [{ width: 800, height: 600, crop: "limit" }],
   },
 });
-const upload = multer({ storage: storage });
 
-// POST route to add a project
-router.post("/", upload.single("image"), async (req, res) => {
+const upload = multer({ storage });
+
+// Middleware to check admin
+const authenticateAdmin = async (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(401).json({ message: "No token provided" });
 
@@ -26,81 +30,68 @@ router.post("/", upload.single("image"), async (req, res) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(decoded.id);
     if (!user) return res.status(404).json({ message: "User not found" });
+    if (user.role !== "admin") return res.status(403).json({ message: "Only admins are allowed" });
 
-    if (user.role === "admin") {
-      const { title, description } = req.body;
-      const image = req.file?.path; // Use optional chaining
-      if (!image) return res.status(400).json({ message: "Image is required" });
+    req.user = user;
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid token", error: err.message });
+  }
+};
 
-      const project = new Project({ title, description, image });
-      await project.save(); // Save to database
-      res.status(201).json(project); // Return the saved project
-    } else {
-      res.status(403).json({ message: "Only admins can add projects" });
-    }
+// POST /api/projects - Create a project
+router.post("/", authenticateAdmin, upload.single("image"), async (req, res) => {
+  try {
+    const { title, description } = req.body;
+    const image = req.file?.path;
+
+    if (!image) return res.status(400).json({ message: "Image is required" });
+
+    const project = new Project({ title, description, image });
+    await project.save();
+    res.status(201).json(project);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// GET all projects
+// GET /api/projects - List all projects
 router.get("/", async (req, res) => {
   try {
     const projects = await Project.find();
-    res.status(200).json(projects); // Fixed variable name
+    res.status(200).json(projects);
   } catch (err) {
-    res.status(500).json({ error: err.message }); // Fixed error variable
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Update project
-router.put("/:id", upload.single("image"), async (req, res) => {
+// PUT /api/projects/:id - Update a project
+router.put("/:id", authenticateAdmin, upload.single("image"), async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) return res.status(401).json({ message: "No token provided" });
+    const project = await Project.findById(req.params.id);
+    if (!project) return res.status(404).json({ message: "Project not found" });
 
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findById(decoded.id); // Fixed: Added await and findById
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const { title, description } = req.body;
+    if (title) project.title = title;
+    if (description) project.description = description;
+    if (req.file?.path) project.image = req.file.path;
 
-    if (user.role === "admin") {
-      const project = await Project.findById(req.params.id); // Fixed method
-      if (!project) return res.status(404).json({ message: "Project not found" });
-
-      // Update fields
-      if (req.body.title) project.title = req.body.title;
-      if (req.body.description) project.description = req.body.description;
-      if (req.file) project.image = req.file.path;
-
-      await project.save();
-      res.status(200).json(project);
-    } else {
-      res.status(403).json({ message: "Only admins can update projects" });
-    }
+    await project.save();
+    res.status(200).json(project);
   } catch (err) {
-    res.status(500).json({ error: err.message }); // Fixed error variable
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Delete project
-router.delete("/:id", async (req, res) => {
+// DELETE /api/projects/:id - Delete a project
+router.delete("/:id", authenticateAdmin, async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) return res.status(401).json({ message: "No token provided" });
+    const project = await Project.findByIdAndDelete(req.params.id);
+    if (!project) return res.status(404).json({ message: "Project not found" });
 
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findById(decoded.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    if (user.role === "admin") {
-      const project = await Project.findByIdAndDelete(req.params.id);
-      if (!project) return res.status(404).json({ message: "Project not found" });
-      res.status(200).json({ message: "Project deleted successfully" }); // Fixed message
-    } else {
-      res.status(403).json({ message: "Only admins can delete projects" });
-    }
+    res.status(200).json({ message: "Project deleted successfully" });
   } catch (err) {
-    res.status(500).json({ error: err.message }); // Fixed error variable and status code
+    res.status(500).json({ error: err.message });
   }
 });
 
