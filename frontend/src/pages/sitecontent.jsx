@@ -1,11 +1,10 @@
-// SiteManagementPage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import '../styles/siteManagement.css';
 
-const API_URL = 'https://mywebprofile-1.onrender.com/api/site';
+const API_URL = 'https://ahmedkhmiri.onrender.com/api/site';
 
 const SiteManagementPage = () => {
   const [token] = useState(localStorage.getItem('token'));
@@ -43,7 +42,7 @@ const SiteManagementPage = () => {
       setSites(response.data);
     } catch (error) {
       toast.error('خطأ في تحميل المواقع');
-      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
+      console.error('Error fetching sites: ', error.response ? error.response.data : error.message);
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +86,6 @@ const SiteManagementPage = () => {
       };
       if (editingId) {
         await axios.put(`${API_URL}/${editingId}`, formDataToSend, config);
-        console.log([...formDataToSend.entries()]);
         toast.success('تم التحديث بنجاح');
       } else {
         await axios.post(API_URL, formDataToSend, config);
@@ -97,8 +95,7 @@ const SiteManagementPage = () => {
       resetForm();
     } catch (err) {
       toast.error('حدث خطأ أثناء الحفظ');
-      console.log([...formDataToSend.entries()]);
-      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
+      console.error('Error saving site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
     }
@@ -116,8 +113,8 @@ const SiteManagementPage = () => {
       logoheader: null,
       logohero: null
     });
-    setLogoheaderPreview(site.logoheader ? `https://mywebprofile-1.onrender.com/${site.logoheader}` : '');
-    setLogoheroPreview(site.logohero ? `https://mywebprofile-1.onrender.com/${site.logohero}` : '');
+    setLogoheaderPreview(site.logoheader ? `https://ahmedkhmiri.onrender.com/${site.logoheader}` : '');
+    setLogoheroPreview(site.logohero ? `https://ahmedkhmiri.onrender.com/${site.logohero}` : '');
     setEditingId(site._id);
   };
 
@@ -132,8 +129,7 @@ const SiteManagementPage = () => {
         fetchSites();
       } catch (err) {
         toast.error('حدث خطأ أثناء الحذف');
-        console.error(err);
-      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
+        console.error('Error deleting site: ', err.response ? err.response.data : err.message);
       } finally {
         setIsLoading(false);
       }
@@ -150,7 +146,6 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في تحديد الموقع');
-      console.error(err);
       console.error('Error selecting site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
@@ -167,8 +162,7 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في إلغاء التحديد');
-      console.error(err);
-      console.error('Error selecting site: ', err.response ? err.response.data : err.message);
+      console.error('Error deselecting site: ', err.response ? err.response.data : err.message);
     } finally {
       setIsLoading(false);
     }
@@ -195,7 +189,6 @@ const SiteManagementPage = () => {
     <div className="site-management-container">
       <h1>{editingId ? 'تعديل الموقع' : 'إضافة موقع'}</h1>
       <form onSubmit={handleSubmit} className="site-form">
-        {/* بقية الحقول */}
         <input type="text" name="siteName" value={formData.siteName} onChange={handleInputChange} required />
         <textarea name="siteDescription" value={formData.siteDescription} onChange={handleInputChange} required />
         <textarea name="hero" value={formData.hero} onChange={handleInputChange} required />
