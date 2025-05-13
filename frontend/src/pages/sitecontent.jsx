@@ -43,10 +43,7 @@ const SiteManagementPage = () => {
       setSites(response.data);
     } catch (error) {
       toast.error('خطأ في تحميل المواقع');
-<<<<<<< HEAD
-=======
       console.error('Error selecting site: ', err.response ? err.response.data : err.message);
->>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
     } finally {
       setIsLoading(false);
     }
@@ -99,10 +96,7 @@ const SiteManagementPage = () => {
       resetForm();
     } catch (err) {
       toast.error('حدث خطأ أثناء الحفظ');
-<<<<<<< HEAD
-=======
       console.error('Error selecting site: ', err.response ? err.response.data : err.message);
->>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
     } finally {
       setIsLoading(false);
     }
@@ -136,11 +130,8 @@ const SiteManagementPage = () => {
         fetchSites();
       } catch (err) {
         toast.error('حدث خطأ أثناء الحذف');
-<<<<<<< HEAD
         console.error(err);
-=======
       console.error('Error selecting site: ', err.response ? err.response.data : err.message);
->>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
       } finally {
         setIsLoading(false);
       }
@@ -157,11 +148,8 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في تحديد الموقع');
-<<<<<<< HEAD
       console.error(err);
-=======
       console.error('Error selecting site: ', err.response ? err.response.data : err.message);
->>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
     } finally {
       setIsLoading(false);
     }
@@ -177,11 +165,8 @@ const SiteManagementPage = () => {
       fetchSites();
     } catch (err) {
       toast.error('خطأ في إلغاء التحديد');
-<<<<<<< HEAD
       console.error(err);
-=======
       console.error('Error selecting site: ', err.response ? err.response.data : err.message);
->>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
     } finally {
       setIsLoading(false);
     }

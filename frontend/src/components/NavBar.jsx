@@ -41,11 +41,7 @@ export const NavBar = ({logo, siteName}) => {
   // التحقق إذا كان يحتوي على http
   const fullUrl = cleanedPath.startsWith('http')
     ? cleanedPath
-<<<<<<< HEAD
     : `http://localhost:3000/${cleanedPath}`;
-=======
-    : `https://ahmedkhmiri.onrender.com/${cleanedPath}`;
->>>>>>> a9a21085fb0d6df9a2e3c40407cc7b87675db24d
 
   console.log("✅ Final logohero path:", fullUrl);
 
