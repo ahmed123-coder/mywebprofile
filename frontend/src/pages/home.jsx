@@ -30,7 +30,7 @@ const Home = () => {
   logo={siteContent?.logoheader} 
   siteName={siteContent?.siteName}
 />
-<Banner hero={siteContent?.hero} logohero={`https://mywebprofile-1.onrender.com/${siteContent?.logohero}`}/>
+<Banner hero={siteContent?.hero} logohero={siteContent?.logohero}/>
 <Skills />
 <Projects />
 <Contact 
