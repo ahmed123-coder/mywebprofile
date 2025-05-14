@@ -1,4 +1,13 @@
-export const NavBar = ({ logo, siteName }) => {
+import { useState, useEffect } from "react";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import logo from '../assets/img/logo.svg';
+import navIcon1 from '../assets/img/nav-icon1.svg';
+import navIcon2 from '../assets/img/nav-icon2.svg';
+import navIcon3 from '../assets/img/nav-icon3.svg';
+import { HashLink } from 'react-router-hash-link';
+
+export const NavBar = ({logo, siteName}) => {
+
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
 
@@ -23,13 +32,7 @@ export const NavBar = ({ logo, siteName }) => {
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand href="/" className="title-web">
-          {logo && (
-            <img
-              src={logo.startsWith('http') ? logo : `https://mywebprofile-1.onrender.com/${logo}`}
-              alt="Header Img"
-              className="logo"
-            />
-          )}
+        <img src={logo} alt="Header Img" className="logo"/>
           <span className="title">{siteName}</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
