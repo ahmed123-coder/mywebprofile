@@ -12,11 +12,12 @@ const JWT_SECRET = "your_secret_key";
 // إعداد Cloudinary Storage
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: async (req, file) => ({
+  params: {
     folder: "uploads",
-    allowed_formats: ["jpg", "jpeg", "png", "webp"],
-    public_id: Date.now() + "-" + file.originalname.split('.')[0],
-  }),
+    upload_preset: "uploads",
+    allowed_formats: ["jpg", "png", "jpeg", "webp"],
+    transformation: [{ width: 800, crop: "limit" }],
+  },
 });
 
 const upload = multer({ storage });
