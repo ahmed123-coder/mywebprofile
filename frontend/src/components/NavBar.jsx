@@ -11,13 +11,8 @@ export const NavBar = ({ logo, siteName }) => {
 
   useEffect(() => {
     const onScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -30,7 +25,9 @@ export const NavBar = ({ logo, siteName }) => {
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand href="/" className="title-web">
-          {logo && <img src={logo} alt="Header Img" className="logo" />}
+          {logo && logo.startsWith("https://") && (
+            <img src={logo} alt="Header Logo" className="logo" />
+          )}
           <span className="title">{siteName}</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
@@ -44,11 +41,11 @@ export const NavBar = ({ logo, siteName }) => {
           </Nav>
           <span className="navbar-text">
             <div className="social-icon">
-              <a href="https://www.linkedin.com/in/hamoud-khemiri-901404291/"><img src={navIcon1} alt="" /></a>
-              <a href="https://www.facebook.com/ahmed.khemiri.180410"><img src={navIcon2} alt="" /></a>
-              <a href="https://www.instagram.com/ahmedkhemiri6/"><img src={navIcon3} alt="" /></a>
+              <a href="https://www.linkedin.com/in/hamoud-khemiri-901404291/"><img src={navIcon1} alt="LinkedIn" /></a>
+              <a href="https://www.facebook.com/ahmed.khemiri.180410"><img src={navIcon2} alt="Facebook" /></a>
+              <a href="https://www.instagram.com/ahmedkhemiri6/"><img src={navIcon3} alt="Instagram" /></a>
             </div>
-            <HashLink to='#connect'>
+            <HashLink to="#connect">
               <button className="vvd"><span>Let’s Connect</span></button>
             </HashLink>
           </span>
