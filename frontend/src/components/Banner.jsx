@@ -69,15 +69,7 @@ export const Banner = ({ hero, logohero }) => {
                 <div className={isVisible ? "banner-img animate__animated animate__zoomIn" : ""}>
                   <div className={isVisible ? "banner-img animate__animated animate__zoomIn" : ""}>
                   {logohero && (() => {
-
-  // تنظيف المسار من الباكسلاش
-  const cleanedPath = logohero.replace(/\\/g, '/');
-
-  // التحقق إذا كان يحتوي على http
-  const fullUrl = cleanedPath.startsWith('http')
-    ? cleanedPath
-    : `https://mywebprofile-1.onrender.com/${cleanedPath}`;
-  return <img src={fullUrl} alt="Header Img" />;
+  return <img src={logohero} alt="Header Img" />;
 })()}
 
 </div>
