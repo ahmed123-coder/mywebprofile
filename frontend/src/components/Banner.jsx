@@ -68,7 +68,7 @@ export const Banner = ({ hero, logohero }) => {
               {({ isVisible }) =>
                 <div className={isVisible ? "banner-img animate__animated animate__zoomIn" : ""}>
                   <div className={isVisible ? "banner-img animate__animated animate__zoomIn" : ""}>
-
+                      {logohero && <img src={logohero} alt="Header Img" />}
 </div>
 
                 </div>}
