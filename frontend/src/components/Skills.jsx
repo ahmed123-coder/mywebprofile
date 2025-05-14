@@ -52,7 +52,7 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2>Skills</h2>
-                        <p>  As a MERN Stack developer, I build powerful web applications using MongoDB, Express, React, and Node.js. I help bring your ideas to life with clean, scalable code and modern cloud deployment solutions.<br></br>My Services</p>
+                        <p> These are some of the professional services I offer as a web developer. I’m committed to delivering high-quality solutions tailored to meet the unique needs of each client, using modern technologies and a user-centered approach.</p>
                         <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
                             {skills.map((skill, index) => {
                                 return (
