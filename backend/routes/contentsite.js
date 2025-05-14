@@ -14,6 +14,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "uploads",
+    upload_preset: "uploads",
     allowed_formats: ["jpg", "png", "jpeg", "webp"],
     transformation: [{ width: 800, crop: "limit" }],
   },
@@ -63,6 +64,9 @@ router.post(
 
       const logoheader = req.files?.logoheader?.[0]?.path;
       const logohero = req.files?.logohero?.[0]?.path;
+
+      console.log("Logo Header Path:", logoheader);
+      console.log("Logo Hero Path:", logohero);
 
       if (!siteName || !siteDescription || !hero || !footer || !contactEmail) {
         return res.status(400).json({ message: "All fields are required" });
@@ -149,6 +153,9 @@ router.put(
 
       const logoheader = req.files?.logoheader?.[0]?.path;
       const logohero = req.files?.logohero?.[0]?.path;
+
+      console.log("Logo Header Path:", logoheader);
+      console.log("Logo Hero Path:", logohero);
 
       const site = await Site.findById(req.params.id);
       if (!site) return res.status(404).json({ message: "Site not found" });
