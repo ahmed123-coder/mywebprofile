@@ -43,8 +43,6 @@ export const NavBar = ({logo, siteName}) => {
     ? cleanedPath
     : `https://mywebprofile-1.onrender.com/${cleanedPath}`;
 
-  console.log("✅ Final logohero path:", fullUrl);
-
   return <img src={fullUrl} alt="Header Img" className="logo"/>;
 })()}
           <span className="title">{siteName}</span>
