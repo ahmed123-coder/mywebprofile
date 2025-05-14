@@ -27,7 +27,7 @@ export const NavBar = ({ logo, siteName }) => {
   };
 
   // معالجة الرابط قبل تمريره إلى <img>
-  const processedLogo = logo?.startsWith('http') ? logo : `https://mywebprofile-1.onrender.com/${logo}`;
+  const processedLogo = logo?.startsWith('https') ? logo : `https://mywebprofile-1.onrender.com/${logo}`;
 
   return (
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
