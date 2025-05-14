@@ -26,7 +26,7 @@ const Home = () => {
   }, []);
   return (
     <div className="App">
-<NavBar logo={`https://mywebprofile-1.onrender.com/${siteContent?.logoheader}`}  siteName={siteContent?.siteName}/>
+<NavBar logo={`${siteContent?.logoheader}`}  siteName={siteContent?.siteName}/>
 <Banner hero={siteContent?.hero} logohero={`https://mywebprofile-1.onrender.com/${siteContent?.logohero}`}/>
 <Skills />
 <Projects />
