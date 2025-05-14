@@ -26,16 +26,11 @@ export const NavBar = ({ logo, siteName }) => {
     setActiveLink(value);
   };
 
-  // معالجة الرابط لإزالة النص "https://mywebprofile-1.onrender.com"
-  const processedLogo = logo?.replace("https://mywebprofile-1.onrender.com", "");
-
   return (
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand href="/" className="title-web">
-          {processedLogo && (
-            <img src={processedLogo} alt="Header Img" className="logo" />
-          )}
+          {logo && <img src={logo} alt="Header Img" className="logo" />}
           <span className="title">{siteName}</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
