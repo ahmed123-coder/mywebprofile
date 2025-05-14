@@ -26,8 +26,8 @@ export const NavBar = ({ logo, siteName }) => {
     setActiveLink(value);
   };
 
-  // معالجة الرابط قبل تمريره إلى <img>
-  const processedLogo = logo?.startsWith('http') ? logo : `https://mywebprofile-1.onrender.com/${logo}`;
+  // معالجة الرابط لإزالة النص "https://mywebprofile-1.onrender.com"
+  const processedLogo = logo?.replace("https://mywebprofile-1.onrender.com", "");
 
   return (
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
