@@ -33,17 +33,7 @@ export const NavBar = ({logo, siteName}) => {
       <Container>
         <Navbar.Brand href="/" className="title-web">
           {logo && (() => {
-  console.log("قيمة logohero:", logo);
-
-  // تنظيف المسار من الباكسلاش
-  const cleanedPath = logo.replace(/\\/g, '/');
-
-  // التحقق إذا كان يحتوي على http
-  const fullUrl = cleanedPath.startsWith('http')
-    ? cleanedPath
-    : `https://mywebprofile-1.onrender.com/${cleanedPath}`;
-
-  return <img src={fullUrl} alt="Header Img" className="logo"/>;
+  return <img src={logo} alt="Header Img" className="logo"/>;
 })()}
           <span className="title">{siteName}</span>
         </Navbar.Brand>
